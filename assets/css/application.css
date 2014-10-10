@@ -1,0 +1,8 @@
+body {
+     padding-top: 60px; /* 60px to make the container make room for the navigation bar */
+ }
+
+.navbar-fixed-top {
+    background: #00c8f8;
+
+}
