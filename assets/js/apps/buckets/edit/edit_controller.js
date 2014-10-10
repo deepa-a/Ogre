@@ -17,8 +17,13 @@ Ogre.module("BucketsApp.Edit",function(Edit,Ogre,Backbone,Marionette,$,_){
                     });
 
                     bucketFormView.on("form:submit",function(data){
-                        bucket.save(data);
-                        Ogre.trigger("bucket:view",bucket.get("id"));
+                        if(bucket.save(data)){
+                           Ogre.trigger("bucket:view",bucket.get("id"));
+                        }
+                        else{
+                            bucketFormView.triggerMethod("form:data:invalid",bucket.validationError);
+                        }
+
                     });
                 }
                 else{

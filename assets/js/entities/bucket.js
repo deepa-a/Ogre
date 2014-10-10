@@ -5,6 +5,21 @@ Ogre.module("Entities", function (Entities,Ogre,Backbone,Marionette,$,_) {
             bucketName: "",
             bucketValue: "",
             bucketStartDate:""
+        },
+        validate: function(attrs,options){
+            var errors = {}
+            if(!attrs.bucketName){
+                errors.bucketName = "Bucket Name cannot be empty";
+            }
+            if(!attrs.bucketValue){
+                errors.bucketValue = "Bucket Value cannot be empty"
+            }
+            if(!attrs.bucketStartDate){
+                errors.bucketStartDate = "Bucket start date cannot be empty"
+            }
+            if(!_.isEmpty(errors)){
+                return errors;
+            }
         }
     });
     Entities.configureStorage(Entities.Bucket);
