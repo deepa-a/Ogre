@@ -15,13 +15,17 @@ Ogre.module("BucketsApp.New",function(New,Ogre,Backbone,Marionette,$,_){
                    });
 
                    bucketFormView.on("form:submit",function(data){
-                       debugger
                        var highestID = buckets.max(function(c){return c.id});
                        highestID = highestID.get("id");
                        data.id = highestID+1;
-                       bucket.save(data);
-                       buckets.add(bucket);
-                       Ogre.trigger("buckets:list");
+                       if(bucket.save(data)){
+                           buckets.add(bucket);
+                           Ogre.trigger("buckets:list");
+                       }
+                       else{
+                           bucketFormView.triggerMethod("form:data:invalid",bucket.validationError);
+                       }
+
                    });
                    Ogre.mainRegion.show(bucketFormView);
                });
